@@ -14,7 +14,6 @@ import com.micro.accounts.repository.CustomerRepository;
 import com.micro.accounts.service.IAccountsService;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.Optional;
 import java.util.Random;
 
@@ -40,8 +39,9 @@ public class AccountsServiceImpl implements IAccountsService {
         if(optionalCustomer.isPresent()){
             throw new CustomerAlreadyExistsException("Customer already registered with given mobileNumber " + customerDto.getMobileNumber());
         }
-        customer.setCreatedAt(LocalDateTime.now());
-        customer.setCreatedBy("Anonymous");
+        // This below is created by jpa
+        //customer.setCreatedAt(LocalDateTime.now());
+        //customer.setCreatedBy("Anonymous");
         Customer savedCustomer = customerRepository.save(customer);
         accountsRepository.save(createNewAccount(savedCustomer));
     }
@@ -60,8 +60,9 @@ public class AccountsServiceImpl implements IAccountsService {
         newAccount.setAccountNumber(randomAccNumber);
         newAccount.setAccountType(AccountsConstants.SAVINGS);
         newAccount.setBranchAddress(AccountsConstants.ADDRESS);
-        newAccount.setCreatedAt(LocalDateTime.now());
-        newAccount.setCreatedBy("Anonymous");
+        // This below is created by jpa
+        //newAccount.setCreatedAt(LocalDateTime.now());
+        //newAccount.setCreatedBy("Anonymous");
         return newAccount;
     }
 
